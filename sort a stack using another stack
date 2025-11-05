@@ -1,0 +1,52 @@
+#include <stdio.h>
+#define MAX 100
+
+int mainStack[MAX], sortedStack[MAX];
+int top1 = -1, top2 = -1;
+
+void pushMain(int val) {
+    mainStack[++top1] = val;
+}
+
+int popMain() {
+    return mainStack[top1--];
+}
+
+void pushSorted(int val) {
+    sortedStack[++top2] = val;
+}
+
+int popSorted() {
+    return sortedStack[top2--];
+}
+
+int peekSorted() {
+    return sortedStack[top2];
+}
+
+void sortStack() {
+    while (top1 != -1) {
+        int temp = popMain();
+        while (top2 != -1 && peekSorted() > temp) {
+            pushMain(popSorted());
+        }
+        pushSorted(temp);
+    }
+
+    printf("Sorted stack:\n");
+    while (top2 != -1)
+        printf("%d\n", popSorted());
+}
+
+int main() {
+    pushMain(34);
+    pushMain(3);
+    pushMain(31);
+    pushMain(98);
+    pushMain(92);
+    pushMain(23);
+
+    sortStack();
+
+    return 0;
+}

@@ -1,0 +1,84 @@
+#include <stdio.h>
+# define MAX 5
+int stack[MAX];
+ int front=-1;
+ int rear=-1;
+
+void enqueue(int k)
+{
+  if((rear+1)%MAX==front)
+  {
+      printf("stack overflow");
+  }
+  else if(front==-1 && rear==-1)
+  {
+      front=rear=0;
+      stack[rear]=k;
+  }
+  else
+  {
+      rear=((rear+1)%MAX);
+      stack[rear]=k;
+  }
+}
+
+void dequeue()
+{
+ 
+ if(front==-1 && rear==-1)
+ {
+     printf("stack underrflow");
+ }
+ else if(front==rear)
+ {
+     front=rear=-1;
+     
+ }
+ else
+ {
+     front=(front+1)%MAX;
+      
+}
+}
+
+void display()
+{
+    int i=front;
+    if(front==-1 && rear==-1)
+    {
+        printf("stack underflow");
+    }
+    else
+    {
+       while(i!=rear)
+       {
+           
+           printf("%d \n",stack[i]);
+           i=(i+1)%MAX;
+       }
+       printf("%d \n",stack[rear]);
+    }
+}
+    
+    
+int main()
+{
+    enqueue(5);
+    enqueue(10);
+    enqueue(51);
+    enqueue(54);
+    display();
+    dequeue();
+    display("\n");
+return 0;
+}
+
+
+
+
+
+
+
+
+
+

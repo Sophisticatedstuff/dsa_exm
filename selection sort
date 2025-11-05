@@ -1,0 +1,54 @@
+#include <stdio.h>
+
+void bubblesortdescending(int a[],int n) {
+    int i,j,max,temp;
+    for(i=0;i<n-1;i++)
+    {
+       max=i;
+       {
+           for(j=i+1;j<n;j++)
+           {
+               if(a[j]>a[max])
+               {
+                   max=j;
+               }
+           }
+       }
+       temp=a[i];
+       a[i]=a[max];
+       a[max]=temp;
+    }
+    
+}
+
+void printarray(int a[],int n){
+    
+    int i;
+    printf("The sorted array is here");
+    for(i=0;i<n;i++)
+    {
+        printf("%d",a[i]);
+    }
+    printf("\n");
+}
+
+
+
+int main(){
+    int i,a[20],n;
+    printf("Enter the number of elements in the array");
+    scanf("%d",&n);
+    printf("Enter the array elements ");
+    for(i=0;i<n;i++)
+    {
+    scanf("%d",&a[i]);
+    }
+    
+    
+    bubblesortdescending(a,n);
+    printf("The sorted array in the descending order \n");
+    
+    printarray(a,n);
+    return 0;
+
+}

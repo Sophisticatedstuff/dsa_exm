@@ -1,0 +1,156 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+struct node {
+    int data;
+    struct node* next;
+};
+
+// Global head pointer
+struct node* head = NULL;
+
+// Traverse and print the list
+void traversal() {
+    struct node* temp = head;
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+// Insert at the end
+void insertAtEnd(int value) {
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (head == NULL) {
+        head = newNode;
+        return;
+    }
+
+    struct node* temp = head;
+    while (temp->next != NULL)
+        temp = temp->next;
+
+    temp->next = newNode;
+}
+
+// Insert at the beginning
+void insertAtBeginning(int value) {
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+}
+
+// Insert at a given position (1-based index)
+void insertAtPosition(int value, int position) {
+    if (position < 1) {
+        printf("Invalid position\n");
+        return;
+    }
+
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (position == 1) {
+        newNode->next = head;
+        head = newNode;
+        return;
+    }
+
+    struct node* temp = head;
+    for (int i = 1; i < position - 1; i++) {
+        if (temp == NULL) {
+            printf("Position out of bounds\n");
+            free(newNode);
+            return;
+        }
+        temp = temp->next;
+    }
+
+    if (temp == NULL) {
+        printf("Position out of bounds\n");
+        free(newNode);
+        return;
+    }
+
+    newNode->next = temp->next;
+    temp->next = newNode;
+}
+
+//Deletiong the elements of tvhe elements in the given functions.
+
+
+// Function to delete at end
+void deleteAtEnd() {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+
+    if (head->next == NULL) {
+        free(head);
+        head = NULL;
+        return;
+    }
+
+    struct node* temp = head;
+    while (temp->next->next != NULL) {
+        temp = temp->next;
+    }
+
+    free(temp->next);
+    temp->next = NULL;
+}
+
+// Function to delete at a given position
+void deleteAtPosition(int position) {
+    if (head == NULL) {
+        printf("List is empty!\n");
+        return;
+    }
+
+    if (position == 1) {
+        struct node* temp = head;
+        head = head->next;
+        free(temp);
+        return;
+    }
+
+    struct node* temp = head;
+    for (int i = 1; i < position - 1; i++) {
+        if (temp == NULL) {
+            printf("Invalid position!\n");
+            return;
+        }
+        temp = temp->next;
+    }
+
+    if (temp->next == NULL) {
+        printf("Invalid position!\n");
+        return;
+    }
+
+    struct node* deleteNode = temp->next;
+    temp->next = deleteNode->next;
+    free(deleteNode);
+}
+
+int main() {
+    insertAtBeginning(10);    
+    insertAtEnd(20);          
+    insertAtPosition(15, 2);  
+    insertAtPosition(5, 1);   
+    insertAtEnd(25);  
+    deleteAtEnd(25);
+
+    printf("Linked List:\n");
+    traversal();
+
+    return 0;
+}

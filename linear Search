@@ -1,0 +1,51 @@
+#include <stdio.h>
+
+
+void linear(int a[], int n) {
+    int i, key, found = 0;
+    
+    printf("Enter the element to search: ");
+    scanf("%d", &key);
+
+    for (i = 0; i < n; i++) {
+        if (a[i] == key) {
+            printf("The element %d is found at index %d.\n", key, i);
+            found = 1;
+            break; 
+        }
+    }
+
+    if (!found) {
+        printf("The element %d is not found in the array.\n", key);
+    }
+}
+
+
+void printarray(int a[], int n) {
+    int i;
+    printf("The array is: ");
+    for (i = 0; i < n; i++) {
+        printf("%d ", a[i]);
+    }
+    printf("\n");
+}
+
+
+int main() {
+    int i, a[20], n;
+
+    printf("Enter the number of elements in the array: ");
+    scanf("%d", &n);
+
+    printf("Enter the array elements: ");
+    for (i = 0; i < n; i++) {
+        scanf("%d", &a[i]);
+    }
+
+    printf("The inputted array is:\n");
+    printarray(a, n);
+
+    linear(a, n); 
+
+    return 0;
+}

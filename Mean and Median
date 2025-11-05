@@ -1,0 +1,69 @@
+#include <stdio.h>
+
+void bubblesortdescending(int a[],int n) {
+    int i,j,key;
+    for(i=1;i<n;i++)
+    {
+      key=a[i];
+      j=i-1;
+      while(j>=0 && a[j]>key)
+      {
+          a[j+1]=a[j];
+          j=j-1;
+      }
+      a[j+1]=key;
+    
+}
+}
+
+void printarray(int a[],int n){
+    
+    int i;
+    printf("The sorted array is here");
+    for(i=0;i<n;i++)
+    {
+        printf("%d",a[i]);
+    }
+    printf("\n");
+}
+
+void mean(int a[],int n)
+{
+    int i,sum=0;
+    float meanvalue,median;
+    for(i=0;i<n;i++)
+    {
+    sum=sum+a[i];
+    }
+    meanvalue=sum/n;
+    printf("%.2f",meanvalue);
+    if (n % 2 == 0)
+        printf("Median = %.2f\n", (a[n / 2 - 1] + a[n / 2]) /2.0);
+    else
+        printf("Median = %d\n", a[n / 2]);
+    
+}
+
+
+int main(){
+    int i,a[20],n;
+    printf("Enter the number of elements in the array");
+    scanf("%d",&n);
+    printf("Enter the array elements ");
+    for(i=0;i<n;i++)
+    {
+    scanf("%d",&a[i]);
+    }
+    
+    
+    bubblesortdescending(a,n);
+    printf("The sorted array in the descending order \n");
+    
+    printarray(a,n);
+    
+    printf("THe mean is ");
+    mean(a,n);
+    
+    return 0;
+
+}

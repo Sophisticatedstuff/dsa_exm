@@ -1,0 +1,48 @@
+# include<stdio.h>
+# define MAX 100
+int main()
+{
+int matrix[MAX][MAX],sprase[MAX][3],rows,cols;
+int i,j,k=0;
+
+printf("Enter the number of rows");
+scanf("%d",&rows);
+printf("Enter the nuber of columns");
+scanf("%d",&cols);
+
+printf("Enter the matrix elements");
+for(i=0;i<rows;i++)
+{
+for(j=0;j<cols;j++)
+{
+scanf("%d",&matrix[i][j]);
+}
+}
+
+sprase[0][0]=rows;
+sprase[0][1]=cols;
+sprase[0][2]=0;
+
+for(i=0;i<rows;i++)
+{
+for(j=0;j<cols;j++)
+{
+if(matrix[i][j]!=0)
+{
+k++;
+sprase[k][0]=i;
+sprase[k][1]=j;
+sprase[k][2]=matrix[i][j];
+}
+}
+}
+sprase[0][2]=k;
+
+printf("Sprase matrix representation \n");
+
+for(i=0;i<=k;i++)
+{
+printf(" %d %d %d", sprase[i][0],sprase[i][1],sprase[i][2]);
+}
+return 0;
+}

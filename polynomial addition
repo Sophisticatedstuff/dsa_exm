@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+struct Term {
+    int coeff;
+    int expo;
+};
+
+int main() {
+    struct Term poly1[10], poly2[10], result[20];
+    int n1, n2, n3 = 0;
+    int i, j;
+
+   
+    printf("Enter number of terms in first polynomial: ");
+    scanf("%d", &n1);
+    printf("Enter terms for first polynomial (coeff expo) in descending order of exponents:\n");
+    for (i = 0; i < n1; i++) {
+        scanf("%d %d", &poly1[i].coeff, &poly1[i].expo);
+    }
+
+    
+    printf("Enter number of terms in second polynomial: ");
+    scanf("%d", &n2);
+    printf("Enter terms for second polynomial (coeff expo) in descending order of exponents:\n");
+    for (i = 0; i < n2; i++) {
+        scanf("%d %d", &poly2[i].coeff, &poly2[i].expo);
+    }
+
+    
+    i = 0;
+    j = 0;
+    while (i < n1 && j < n2) {
+        if (poly1[i].expo > poly2[j].expo) {
+            result[n3++] = poly1[i++];
+        } else if (poly1[i].expo < poly2[j].expo) {
+            result[n3++] = poly2[j++];
+        } else { 
+            result[n3].coeff = poly1[i].coeff + poly2[j].coeff;
+            result[n3].expo = poly1[i].expo;
+            i++;
+            j++;
+            n3++;
+        }
+    }
+
+   
+    while (i < n1) {
+        result[n3++] = poly1[i++];
+    }
+    while (j < n2) {
+        result[n3++] = poly2[j++];
+    }
+
+  
+    printf("\nSum of polynomials: ");
+    for (i = 0; i < n3; i++) {
+        printf("%dx^%d", result[i].coeff, result[i].expo);
+        if (i < n3 - 1)
+            printf(" + ");
+    }
+    printf("\n");
+
+    return 0;
+}
